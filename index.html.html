@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidéo avec Musique</title>
+    <style>
+        /* Style pour centrer la vidéo */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Taille maximale de la vidéo */
+            margin: 0 auto;
+            background-color: black;
+        }
+
+        /* Style du bouton play */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 40px;
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        /* Style du bouton play une fois la vidéo lancée (réduit la taille ou le cache) */
+        .hidden {
+            display: none;
+        }
+
+        /* Si tu veux que la vidéo soit réduite à une petite taille, par exemple */
+        .small-button {
+            font-size: 10px;
+            padding: 5px;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="video-container">
+    <!-- Bouton Play -->
+    <div id="playButton" class="play-button">▶️</div>
+
+    <!-- Vidéo -->
+    <video id="videoPlayer" width="100%" height="auto" preload="auto">
+        <source src="ta-video.webm" type="video/webm">
+        Ton navigateur ne prend pas en charge la vidéo.
+    </video>
+
+    <!-- Audio -->
+    <audio id="audioPlayer" loop>
+        <source src="ta-musique.mp3" type="audio/mpeg">
+        Ton navigateur ne prend pas en charge l'audio.
+    </audio>
+</div>
+
+<script>
+    // Cibler les éléments HTML
+    const playButton = document.getElementById('playButton');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const audioPlayer = document.getElementById('audioPlayer');
+
+    // Fonction pour jouer la vidéo et la musique
+    const playMedia = () => {
+        // Tentative de lecture de la vidéo et de l'audio
+        const videoPromise = videoPlayer.play();
+        const audioPromise = audioPlayer.play();
+
+        // Si la vidéo ou l'audio ne se lancent pas automatiquement, forcer le démarrage
+        videoPromise.catch(() => {
+            videoPlayer.play();
+        });
+
+        audioPromise.catch(() => {
+            audioPlayer.play();
+        });
+
+        // Masquer ou réduire le bouton play après avoir cliqué
+        playButton.classList.add('hidden');
+    };
+
+    // Écouter l'événement de clic sur le bouton play
+    playButton.addEventListener('click', playMedia);
+
+    // Quand la vidéo se termine, afficher à nouveau le bouton
+    videoPlayer.addEventListener('ended', () => {
+        playButton.classList.remove('hidden');
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

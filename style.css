@@ -1,0 +1,24 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musique Discord</title>
+    <link rel="stylesheet" href="style.css">  <!-- Assure-toi que le fichier est bien lié -->
+</head>
+/* style.css */
+body {
+    background-color: rgb(196, 32, 141); /* Couleur de fond rose */
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+audio {
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: none; /* Empêche de cliquer sur l'audio */
+}
